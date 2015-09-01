@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="codeReviewWeb" version="3.0">
+  <display-name>codeReview  Web Application</display-name>
+  <welcome-file-list>
+  	<welcome-file>ldapv01.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <listener>
+    <listener-class>com.iisigroup.java.tech.application.InitializationListener</listener-class>
+  </listener>
+ 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/applicationContext-dev.xml</param-value>
+	</context-param>
+
+	<listener>
+	   <listener-class>
+	      org.springframework.web.context.ContextLoaderListener
+	   </listener-class>
+	</listener>
+	 
+  	
+	
+	<servlet>
+    	<display-name>ldapViewServlet</display-name>
+    	<servlet-name>ldapViewServlet</servlet-name>
+    	<servlet-class>
+        	org.springframework.web.context.support.HttpRequestHandlerServlet
+    	</servlet-class>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>ldapViewServlet</servlet-name>
+    	<url-pattern>/ldapView</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<display-name>manualCRServlet</display-name>
+    	<servlet-name>manualCRServlet</servlet-name>
+    	<servlet-class>
+        	org.springframework.web.context.support.HttpRequestHandlerServlet
+    	</servlet-class>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>manualCRServlet</servlet-name>
+    	<url-pattern>/manualCR</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<display-name>personCRServlet</display-name>
+    	<servlet-name>personCRServlet</servlet-name>
+    	<servlet-class>
+        	org.springframework.web.context.support.HttpRequestHandlerServlet
+    	</servlet-class>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>personCRServlet</servlet-name>
+    	<url-pattern>/personCR</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<display-name>sonarExecServlet</display-name>
+    	<servlet-name>sonarExecServlet</servlet-name>
+    	<servlet-class>
+        	org.springframework.web.context.support.HttpRequestHandlerServlet
+    	</servlet-class>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>sonarExecServlet</servlet-name>
+    	<url-pattern>/sonarAnalysis</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<display-name>watchersMgrServlet</display-name>
+    	<servlet-name>watchersMgrServlet</servlet-name>
+    	<servlet-class>
+        	org.springframework.web.context.support.HttpRequestHandlerServlet
+    	</servlet-class>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>watchersMgrServlet</servlet-name>
+    	<url-pattern>/watchersMgr</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
