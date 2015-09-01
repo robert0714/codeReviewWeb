@@ -24,8 +24,23 @@
 	      org.springframework.web.context.ContextLoaderListener
 	   </listener-class>
 	</listener>
-	 
-  	
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>ctrlServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/ctrl/ctrl-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<max-file-size>5000000</max-file-size>
+		</multipart-config>
+	</servlet> 
+  	<servlet-mapping>
+    	<servlet-name>ctrlServlet</servlet-name>
+    	<url-pattern>/ctrl/*</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
     	<display-name>ldapViewServlet</display-name>
