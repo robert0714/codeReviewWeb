@@ -16,8 +16,8 @@ import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.EnumerationUtils;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
