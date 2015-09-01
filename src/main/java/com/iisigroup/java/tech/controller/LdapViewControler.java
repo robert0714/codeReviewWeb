@@ -21,13 +21,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.iisigroup.java.tech.ldap.internal.JsonNode;
 import com.iisigroup.java.tech.ldap.internal.Node;
 import com.iisigroup.java.tech.servelet.Filter;
+import com.iisigroup.java.tech.service.LdapService;
 
 @RequestMapping(value = "/ldapViewCtrl")
 @Controller
@@ -36,16 +35,15 @@ public class LdapViewControler {
 	private static Logger LOGGER = LoggerFactory
 			.getLogger(LdapViewControler.class);
 	@Autowired
-	private LdapControler ctl;
+	private LdapService component ;
 
 	public LdapViewControler() {
 		LOGGER.debug("...............LdapViewControler.........");
 		;
 	}
-
 	@ResponseBody
-	@RequestMapping(value = "/listTree", method = RequestMethod.GET)
-	public JsonArray listTree(
+	@RequestMapping(value = "/listTree" )
+	public String listTree(
 			@RequestParam(value = "strategy", required = false) String strategy,
 			@RequestParam(value = "baseDN", required = false) String baseDN) {
 
@@ -53,9 +51,11 @@ public class LdapViewControler {
 
 		LOGGER.debug("strategy: {}", strategy);
 		LOGGER.debug("baseDN: {}", baseDN); 
-		JsonArray  result = retireveLdapTree();
-		return  result ;
+		final  String result = retireveLdapTree().toString();
+		
+		return result ;
 	}
+	
 	protected JsonArray getPseudo() {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		JsonArray jsonArray = factory
@@ -78,12 +78,11 @@ public class LdapViewControler {
 
 	protected JsonArray retireveLdapTree() {
 		final JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		// final LdapControler ctl = new LdapControler();
 
 		final JsonArrayBuilder builder = factory.createArrayBuilder();
 
 		final Filter filter = new NodeFilter();
-		buildJson(ctl.getNodeMap(), builder, factory, filter);
+		buildJson(component.getNodeMap(), builder, factory, filter);
 
 		return builder.build();
 	}
@@ -110,17 +109,12 @@ public class LdapViewControler {
 			}
 			final JsonObjectBuilder unit = factory.createObjectBuilder()
 					.add("id", id).add("pId", pId).add("name", name);
-//			JsonNode unit01 = new JsonNode();
-//			unit01.setId(id);
-//			unit01.setName(name);
-//			unit01.setpId(pId);
+
 			
 			if (filter.include(node)) {
 				unit.add("open", "true");
-//				unit01.setOpen(true);
 			} else {
 				unit.add("open", "false");
-//				unit01.setOpen(false);
 			}
 			builder.add(unit);
 		}

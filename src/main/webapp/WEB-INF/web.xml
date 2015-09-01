@@ -42,17 +42,17 @@
     	<url-pattern>/ctrl/*</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-    	<display-name>ldapViewServlet</display-name>
-    	<servlet-name>ldapViewServlet</servlet-name>
-    	<servlet-class>
-        	org.springframework.web.context.support.HttpRequestHandlerServlet
-    	</servlet-class>
-	</servlet>
-	<servlet-mapping>
-    	<servlet-name>ldapViewServlet</servlet-name>
-    	<url-pattern>/ldapView</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet> -->
+<!--     	<display-name>ldapViewServlet</display-name> -->
+<!--     	<servlet-name>ldapViewServlet</servlet-name> -->
+<!--     	<servlet-class> -->
+<!--         	org.springframework.web.context.support.HttpRequestHandlerServlet -->
+<!--     	</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!--     	<servlet-name>ldapViewServlet</servlet-name> -->
+<!--     	<url-pattern>/ldapView</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	
 	<servlet>
     	<display-name>manualCRServlet</display-name>

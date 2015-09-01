@@ -81,7 +81,7 @@
 		function ldapNodes (){
 			try {
 				console.log("ldapNodes  " ); 
-				var servletCommand = "ldapView";
+				var servletCommand = "ctrl/ldapViewCtrl/listTree";
 				var baseDN = "OU=IE,DC=iead,DC=local";
 				var strategy ="node";
 				$.post(
@@ -90,6 +90,7 @@
                                 "strategy" : strategy
                             }, function(data) {
                             	$.fn.zTree.init($("#treeDemo"), setting, data);
+                            	
                             } ,"json"   );
                              
 			} catch (err) {

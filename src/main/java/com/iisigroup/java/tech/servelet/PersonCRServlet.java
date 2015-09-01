@@ -28,10 +28,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.iisigroup.java.tech.controller.LdapControler;
 import com.iisigroup.java.tech.controller.ManualCRController;
 import com.iisigroup.java.tech.controller.PersonContoller;
 import com.iisigroup.java.tech.ldap.internal.Node;
+import com.iisigroup.java.tech.service.LdapService;
 import com.iisigroup.scan.folder.internal.UserFolder;
 
 /**
@@ -44,7 +44,8 @@ public class PersonCRServlet  extends AbstractServlet {
 	/** The logger. */
     private static Logger LOGGER = LoggerFactory
             .getLogger(PersonCRServlet.class);
-
+	@Autowired
+	private LdapService ctl ;
     @Autowired
     PersonContoller pctr;
     /**
@@ -111,7 +112,7 @@ public class PersonCRServlet  extends AbstractServlet {
 	}
 	protected JsonArray retireveLdapTree (){
 		final	JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		final	LdapControler ctl = new LdapControler();
+//		final	LdapControler ctl = new LdapControler();
 
 		final	JsonArrayBuilder builder = factory.createArrayBuilder();
 		buildJson(ctl.getNodeMap(), builder, factory);

@@ -17,17 +17,19 @@ import java.util.Set;
 
 
 
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.iisigroup.java.tech.ldap.LdapExportNode;
 import com.iisigroup.java.tech.ldap.internal.Node;
 import com.iisigroup.java.tech.utils.Utils;
 import com.iisigroup.scan.folder.ConfigInfo;
-
+@Component("ldapService")
 public class LdapService {
 	/** The Constant logger. */
 	private static final Logger LOGGER = LoggerFactory
