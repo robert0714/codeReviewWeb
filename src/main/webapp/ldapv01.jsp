@@ -105,8 +105,8 @@
 			 	var selectedVersion = $(selectNameForVersion).val();
 				var encoding = $(selectName).val(); 	
 				var statusName = 'input#status_' + empId;
-				
-				var servletCommand = "sonarAnalysis";				
+				 
+				var servletCommand = "ctrl/sonarAnalysisCtrl/sonarExeStatus";
 				$.post(
                     servletCommand,
                             {   "command" : cmd,

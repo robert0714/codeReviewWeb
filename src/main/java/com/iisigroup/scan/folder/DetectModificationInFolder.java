@@ -17,9 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.java.tech.controller.PersonContoller;
-import com.iisigroup.java.tech.controller.SonarExecController;
 import com.iisigroup.java.tech.controller.internal.XlsFilenameFilter;
 import com.iisigroup.java.tech.controller.operation.UserFolderOp;
+
 import com.iisigroup.java.tech.utils.notification.NotificationMgr;
 import com.iisigroup.scan.folder.internal.UserFolder;
 import com.iisigroup.scan.folder.internal.UserProjProfile;

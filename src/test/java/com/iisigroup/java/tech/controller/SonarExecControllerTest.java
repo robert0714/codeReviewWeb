@@ -5,23 +5,22 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils; 
 import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mockito; 
 
 import com.iisigroup.java.tech.controller.operation.UserFolderOp;
+import com.iisigroup.java.tech.service.SonarExecService;
 import com.iisigroup.java.tech.sonar.business.OSvalidator;
 import com.iisigroup.java.tech.sonar.business.ProjPropertiesGen;
 import com.iisigroup.java.tech.utils.ReflectionUtils;
-import com.iisigroup.scan.folder.ConfigInfo;
 import com.iisigroup.scan.folder.internal.UserFolder;
 import com.iisigroup.scan.folder.internal.UserProjProfile;
 
 public class SonarExecControllerTest {
-	private SonarExecController component ;
+	private SonarExecService component ;
 	
 	@Before
 	public void setUp() throws Exception {
-		component = new SonarExecController();
+		component = new SonarExecService();
 		final UserFolderOp op =  Mockito.mock(UserFolderOp.class);
 		final ProjPropertiesGen projPropertiesGen =  Mockito.mock(ProjPropertiesGen.class);
 		Mockito.when(op.prepareSonarRunnerEnv(Mockito.any(UserFolder.class))).thenReturn(FileUtils.getTempDirectory()) ;
