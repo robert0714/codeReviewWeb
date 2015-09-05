@@ -66,18 +66,6 @@
     	<servlet-name>personCRServlet</servlet-name>
     	<url-pattern>/personCR</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-    	<display-name>sonarExecServlet</display-name>
-    	<servlet-name>sonarExecServlet</servlet-name>
-    	<servlet-class>
-        	org.springframework.web.context.support.HttpRequestHandlerServlet
-    	</servlet-class>
-	</servlet>
-	<servlet-mapping>
-    	<servlet-name>sonarExecServlet</servlet-name>
-    	<url-pattern>/sonarAnalysis</url-pattern>
-	</servlet-mapping>
-
+ 
 	
 </web-app>

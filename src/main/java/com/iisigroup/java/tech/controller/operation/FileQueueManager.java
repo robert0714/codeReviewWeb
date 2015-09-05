@@ -1,13 +1,11 @@
 package com.iisigroup.java.tech.controller.operation;
 
 import java.io.File;
-import java.io.IOException; 
-import java.text.SimpleDateFormat;
+import java.io.IOException;  
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.Comparator; 
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,12 +24,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.java.tech.controller.SonarExecController;
+import com.iisigroup.java.tech.service.SonarExecService;
 import com.iisigroup.java.tech.utils.DateUtils;
 import com.iisigroup.java.tech.utils.Utils;
 import com.iisigroup.scan.folder.ConfigInfo;
 import com.iisigroup.scan.folder.internal.UserFolder;
-import com.iisigroup.sonar.httpclient.statics.TypeIExporter;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -138,7 +135,7 @@ public class FileQueueManager implements QueueManager {
 			try {
 
 				offerProcessingState(theOldest);
-				final SonarExecController controller = new SonarExecController();
+				final SonarExecService controller = new SonarExecService();
 
 				// 得到處理紀錄
 				final String processLog = controller

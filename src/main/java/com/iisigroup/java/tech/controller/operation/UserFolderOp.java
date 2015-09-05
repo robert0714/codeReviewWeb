@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.iisigroup.java.tech.sonar.business.ProjPropertiesGen;
 import com.iisigroup.scan.folder.ConfigInfo;
@@ -24,6 +25,7 @@ import com.iisigroup.scan.folder.internal.UserProjProfile;
  * The Class UserFolderOp.
  * 對sonar 專案資料夾進行一切的相關操作負責元件
  */
+@Component("userFolderOp")
 public class UserFolderOp {
     /** The Constant logger. */
     private static final Logger LOGGER = LoggerFactory

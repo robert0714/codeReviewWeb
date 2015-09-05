@@ -1,16 +1,12 @@
-package com.iisigroup.java.tech.controller;
+package com.iisigroup.java.tech.service;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset; 
-import java.util.Map;
-
-import org.apache.commons.io.FileUtils;
+import java.nio.charset.Charset;  
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.ArrayUtils; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -18,19 +14,17 @@ import org.springframework.stereotype.Component;
 import com.iisigroup.java.tech.controller.operation.UserFolderOp;
 import com.iisigroup.java.tech.sonar.business.OSvalidator;  
 import com.iisigroup.java.tech.sonar.business.ProjPropertiesGen;
-import com.iisigroup.scan.folder.ConfigInfo; 
-import com.iisigroup.scan.folder.internal.EmpFactory;
-import com.iisigroup.scan.folder.internal.UserFolder;
-import com.iisigroup.scan.folder.internal.UserProjProfile;
+import com.iisigroup.scan.folder.ConfigInfo;  
+import com.iisigroup.scan.folder.internal.UserFolder; 
 
 /**
  * The Class SonarExecController.
  */
 @Component
-public class SonarExecController {
+public class SonarExecService {
     /** The Constant logger. */
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(SonarExecController.class);
+            .getLogger(SonarExecService.class);
 
     private  final UserFolderOp op = new UserFolderOp();
     
@@ -38,63 +32,7 @@ public class SonarExecController {
     /** The config. */
     private final ConfigInfo config = new ConfigInfo();
     
-    private final ProjPropertiesGen projPropertiesGen = new ProjPropertiesGen();
-    /**
-     * Exec by project key version.
-     * 
-     * @param projectKey
-     *            the project key
-     * @param projectVersion
-     *            the project version
-     * @return the string
-     */
-    public String execByProjectKeyVersion(final String projectKey,
-            final String projectVersion, final String encoding) {
-        if (projectKey == null || projectVersion == null || encoding == null) {
-            throw new NullPointerException(
-                    String.format(
-                            "projectKey is %s , projectVersion is %s , encoding is %s  ",
-                            projectKey, projectVersion, encoding));
-
-        }
-        final EmpFactory factory = EmpFactory.getEmpFactory();
-
-        final Map<String, UserProjProfile> map = factory
-                .getUserProjProfileMapForCodeReview();
-
-        final UserProjProfile info = map.get(projectKey);
-        final UserFolder folder = new UserFolder();
-
-        folder.setInfo(info);
-        folder.setProjectVersion(projectVersion);
-        folder.setSourceEncoding(encoding);
-
-        return exeAnalysis(folder);
-    }
-
-    public String getLog(final UserFolder folder) {
-        String result = null;
-        final File folderFile = this.op.getLogFileFolder(folder);
-        if (folderFile != null && folderFile.isDirectory()
-                && folderFile.exists()) {
-            final StringBuilder sbf = new StringBuilder();
-            for (File file : folderFile.listFiles()) {
-                if (file.isFile()) {
-
-                    try {
-                        sbf.append(FileUtils.readFileToString(file, "UTF8"))
-                                .append(StringUtils.CR);
-                    } catch (IOException e) {
-                        LOGGER.error(e.getMessage(), e);
-
-                    }
-                }
-            }
-            result = sbf.toString();
-        }
-
-        return result;
-    }
+    private final ProjPropertiesGen projPropertiesGen = new ProjPropertiesGen(); 
 
     /**
      * Exe sonar analysis.
