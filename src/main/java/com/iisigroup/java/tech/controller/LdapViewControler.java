@@ -23,10 +23,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iisigroup.java.tech.ldap.internal.Node;
 import com.iisigroup.java.tech.servelet.Filter;
 import com.iisigroup.java.tech.service.LdapService;
+import com.iisigroup.java.tech.service.PersonService;
+import com.iisigroup.scan.folder.internal.UserFolder;
 
 @RequestMapping(value = "/ldapViewCtrl")
 @Controller
@@ -36,10 +39,26 @@ public class LdapViewControler {
 			.getLogger(LdapViewControler.class);
 	@Autowired
 	private LdapService component ;
+    @Autowired
+    PersonService pctr;
 
 	public LdapViewControler() {
 		LOGGER.debug("...............LdapViewControler.........");
 		;
+	}
+	@RequestMapping(value = "/personCR")
+	public ModelAndView personCR(
+			@RequestParam(value = "empUid", required = false) String empUid)
+			throws Exception {
+
+		LOGGER.debug("personCR");
+		LOGGER.debug("empUid: {}", empUid);
+
+		final List<UserFolder> list = pctr.getUserForCRByEmpUid(empUid);
+
+		ModelAndView model = new ModelAndView("ldapv01");
+		model.addObject("userFolderList", list);
+		return model;
 	}
 	@ResponseBody
 	@RequestMapping(value = "/listTree" )
@@ -54,27 +73,7 @@ public class LdapViewControler {
 		final  String result = retireveLdapTree().toString();
 		
 		return result ;
-	}
-	
-	protected JsonArray getPseudo() {
-		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		JsonArray jsonArray = factory
-				.createArrayBuilder()
-				.add(factory
-						.createObjectBuilder()
-						.add("id",
-								"OU=TDD13,OU=TDD10,OU=15_TDD00,OU=IE,DC=iead,DC=local")
-						.add("pId", "0").add("name", "TDD10")
-						.add("open", "true"))
-				.add(factory
-						.createObjectBuilder()
-						.add("id",
-								"CN=黃少丞,OU=TDD13,OU=TDD10,OU=15_TDD00,OU=IE,DC=iead,DC=local")
-						.add("pId",
-								"OU=TDD13,OU=TDD10,OU=15_TDD00,OU=IE,DC=iead,DC=local")
-						.add("name", "黃少丞")).build();
-		return jsonArray;
-	}
+	} 
 
 	protected JsonArray retireveLdapTree() {
 		final JsonBuilderFactory factory = Json.createBuilderFactory(null);

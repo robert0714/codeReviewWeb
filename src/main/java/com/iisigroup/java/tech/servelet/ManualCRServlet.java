@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.iisigroup.java.tech.controller.ManualCRController;
+import com.iisigroup.java.tech.service.ManualCRService;
 import com.iisigroup.java.tech.utils.UserFolderUtils;
 import com.iisigroup.scan.folder.internal.UserFolder;
 import com.iisigroup.sonar.httpclient.statics.StaticsMonthly;
@@ -48,7 +48,7 @@ public class ManualCRServlet  extends AbstractServlet {
 	 ServletContext context; 
 	 
 	 @Autowired
-	 ManualCRController ctl;
+	 ManualCRService ctl;
 	 
     /** The logger. */
     private static Logger LOGGER = LoggerFactory

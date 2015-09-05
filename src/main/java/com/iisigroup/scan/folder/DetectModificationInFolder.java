@@ -16,10 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.java.tech.controller.PersonContoller;
 import com.iisigroup.java.tech.controller.internal.XlsFilenameFilter;
 import com.iisigroup.java.tech.controller.operation.UserFolderOp;
-
+import com.iisigroup.java.tech.service.PersonService;
 import com.iisigroup.java.tech.utils.notification.NotificationMgr;
 import com.iisigroup.scan.folder.internal.UserFolder;
 import com.iisigroup.scan.folder.internal.UserProjProfile;
@@ -38,7 +37,7 @@ public class DetectModificationInFolder {
      * 啟動執行時機為每日定時,以及發信通知時這兩個時間點
      */
     public void scanFolderPreparation(){
-       final PersonContoller perCtrl = new PersonContoller();
+       final PersonService perCtrl = new PersonService();
        final List<UserFolder> allUser = perCtrl.getAllUserByLdap() ;
        final  List<UserFolder> needToNotify = new ArrayList<UserFolder>();
         

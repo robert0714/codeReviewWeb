@@ -1,4 +1,4 @@
-package com.iisigroup.java.tech.controller;
+package com.iisigroup.java.tech.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,13 +24,13 @@ import com.iisigroup.scan.folder.internal.UserProjProfile;
  */
 
 @Component
-public class PersonContoller {
+public class PersonService {
     /** The Constant logger. */
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(PersonContoller.class);
+            .getLogger(PersonService.class);
     private  final Comparator<UserFolder> cp = new UFCP();
     
-    public PersonContoller(){
+    public PersonService(){
     	//UserFolderOp
     }
     /**

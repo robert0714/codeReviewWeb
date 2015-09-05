@@ -25,6 +25,14 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
 
 </beans>
