@@ -41,18 +41,7 @@
     	<servlet-name>ctrlServlet</servlet-name>
     	<url-pattern>/ctrl/*</url-pattern>
 	</servlet-mapping>
-	
-<!-- 	<servlet> -->
-<!--     	<display-name>ldapViewServlet</display-name> -->
-<!--     	<servlet-name>ldapViewServlet</servlet-name> -->
-<!--     	<servlet-class> -->
-<!--         	org.springframework.web.context.support.HttpRequestHandlerServlet -->
-<!--     	</servlet-class> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!--     	<servlet-name>ldapViewServlet</servlet-name> -->
-<!--     	<url-pattern>/ldapView</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	 
 	
 	<servlet>
     	<display-name>manualCRServlet</display-name>
@@ -89,17 +78,6 @@
     	<servlet-name>sonarExecServlet</servlet-name>
     	<url-pattern>/sonarAnalysis</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-    	<display-name>watchersMgrServlet</display-name>
-    	<servlet-name>watchersMgrServlet</servlet-name>
-    	<servlet-class>
-        	org.springframework.web.context.support.HttpRequestHandlerServlet
-    	</servlet-class>
-	</servlet>
-	<servlet-mapping>
-    	<servlet-name>watchersMgrServlet</servlet-name>
-    	<url-pattern>/watchersMgr</url-pattern>
-	</servlet-mapping>
+
 	
 </web-app>
