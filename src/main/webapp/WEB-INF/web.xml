@@ -53,19 +53,6 @@
 	<servlet-mapping>
     	<servlet-name>manualCRServlet</servlet-name>
     	<url-pattern>/manualCR</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-    	<display-name>personCRServlet</display-name>
-    	<servlet-name>personCRServlet</servlet-name>
-    	<servlet-class>
-        	org.springframework.web.context.support.HttpRequestHandlerServlet
-    	</servlet-class>
-	</servlet>
-	<servlet-mapping>
-    	<servlet-name>personCRServlet</servlet-name>
-    	<url-pattern>/personCR</url-pattern>
-	</servlet-mapping>
- 
+	</servlet-mapping> 
 	
 </web-app>

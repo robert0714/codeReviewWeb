@@ -73,7 +73,7 @@
 			if($.isArray(match)){
 				var result =  match[match.length-1] ;
 				console.log("matched: "+ result);
-				window.open("${baseUrl}/personCR?empUid="+result, "_self");
+				window.open("${baseUrl}/ctrl/ldapViewCtrl/personCR?empUid="+result, "_self");
 				return result; 
 			}
 			
@@ -81,7 +81,7 @@
 		function ldapNodes (){
 			try {
 				console.log("ldapNodes  " ); 
-				var servletCommand = "ctrl/ldapViewCtrl/listTree";
+				var servletCommand = "${baseUrl}/ctrl/ldapViewCtrl/listTree";
 				var baseDN = "OU=IE,DC=iead,DC=local";
 				var strategy ="node";
 				$.post(
@@ -106,7 +106,7 @@
 				var encoding = $(selectName).val(); 	
 				var statusName = 'input#status_' + empId;
 				 
-				var servletCommand = "ctrl/sonarAnalysisCtrl/sonarExeStatus";
+				var servletCommand = "${baseUrl}/ctrl/sonarAnalysisCtrl/sonarExeStatus";
 				$.post(
                     servletCommand,
                             {   "command" : cmd,
@@ -219,7 +219,7 @@
     							<td>1.查核同仁(step 2 , 4):<br/> (1)上傳:第一次審查、複查<br/>(2)下載用<br/>2.組長為了確認有無複查日期</td>
     							<td>組長上傳(step 5),<br/>協理觀看<br/><a href="${baseUrl}/img/flow2015_0107.jpg" target="_blank">請參考流程圖。</a></td>
     							<td>進入sonar(step 2 )<br/><a href="${baseUrl}/img/flow2015_0107.jpg" target="_blank">請參考流程圖。</a></td></tr>
-    				 <c:forEach items='${sessionScope["userFolderList"]}'  var="userFolder">
+    				 <c:forEach items='${requestScope["userFolderList"]}'  var="userFolder">
     				 	<tr> <td>${userFolder['info']['empdata']['empId']}</td>
     	<td>
     		${userFolder['info']['empdata']['chtName']}

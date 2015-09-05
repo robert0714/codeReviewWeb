@@ -1,4 +1,4 @@
-package com.iisigroup.java.tech.controller;
+package com.iisigroup.java.tech.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,10 +20,10 @@ import com.iisigroup.scan.folder.internal.UserFolder;
  * *.
  */
 @Component
-public class ManualCRController {
+public class ManualCRService {
     /** The Constant logger. */
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(ManualCRController.class);
+            .getLogger(ManualCRService.class);
 
     /**
      * Gets the manual cr state.

@@ -21,8 +21,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import com.iisigroup.java.tech.controller.PersonContoller;
+import com.iisigroup.java.tech.service.PersonService;
 import com.iisigroup.scan.folder.internal.UserFolder;
 import com.iisigroup.sonar.httpclient.JsonClient01;
 import com.iisigroup.sonar.httpclient.internal.ProjectInfo;
@@ -130,7 +129,7 @@ public class StaticsMonthly {
      * @return the list
      */
     public List<SumPer2Weeks> cal2WeeksAllProjects() {
-        final PersonContoller psC = new PersonContoller();
+        final PersonService psC = new PersonService();
         final List<UserFolder> list = psC.getAllUserForCodeReview();
         final List<SumPer2Weeks> result =new ArrayList<SumPer2Weeks>();
         JsonClient01 client = new JsonClient01();
@@ -171,7 +170,7 @@ public class StaticsMonthly {
     
     public  Map<String ,List<SumPer2Weeks>> cal2WeeksAllProjectsGroupByDepart() {    	
     	
-        final PersonContoller psC = new PersonContoller();
+        final PersonService psC = new PersonService();
         final List<UserFolder> list = psC.getAllUserForCodeReview();
         
         final Map<String ,List<SumPer2Weeks> > result =new  HashMap<String, List<SumPer2Weeks>>();
@@ -288,7 +287,7 @@ public class StaticsMonthly {
      * @return the list
      */
     public List<MonthlyProjSum> calculateAllProjects() {
-        final PersonContoller psC = new PersonContoller();
+        final PersonService psC = new PersonService();
         final List<UserFolder> list = psC.getAllUserForCodeReview();
         final List<MonthlyProjSum> result =new ArrayList<MonthlyProjSum>();
         for(UserFolder uf : list ){
