@@ -71,13 +71,12 @@
 			var match = rx.exec(name);
 			if($.isArray(match)){
 				var result =  match[match.length-1] ;
-				console.log("matched: "+ result);
-			//	window.open("${baseUrl}/personCR?empUid="+result, "_self");
+				console.log("matched: "+ result); 
 				var tmp = $("ul#watchers").val();
 				console.log("tmp: "+ tmp);
 				try {
-					console.log("watchersMgr  " ); 
-					var servletCommand = "watchersMgr";
+					console.log("watchersMgr  " );  
+					var servletCommand = "ctrl/watchersMgrCtrl/operateWatchers";
 					var strategy ="read";
 					$.post(
 	                    servletCommand,
@@ -118,7 +117,7 @@
 		function ldapNodes (){
 			try {
 				console.log("ldapNodes  " ); 
-				var servletCommand = "ldapView";
+				var servletCommand = "ctrl/ldapViewCtrl/listTree";
 				var baseDN = "OU=IE,DC=iead,DC=local";
 				var strategy ="node";
 				$.post(
@@ -140,7 +139,7 @@
 			console.log("addEmpId: "+addEmpId);
 			try {
 				console.log("watchersMgr  " ); 
-				var servletCommand = "watchersMgr";
+				var servletCommand = "ctrl/watchersMgrCtrl/operateWatchers";
 				var strategy ="add";
 				$.post(
                     servletCommand,
@@ -162,7 +161,7 @@
 			console.log("delEmpId: "+delEmpId);
 			try {
 				console.log("watchersMgr  " ); 
-				var servletCommand = "watchersMgr";
+				var servletCommand = "ctrl/watchersMgrCtrl/operateWatchers";
 				var strategy ="delete";
 				$.post(
                     servletCommand,

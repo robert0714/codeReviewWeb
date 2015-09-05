@@ -26,7 +26,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.stereotype.Component;
 
 import com.iisigroup.java.tech.utils.DateUtils;
 import com.iisigroup.java.tech.utils.GmailUtils;
@@ -41,6 +41,7 @@ import com.iisigroup.scan.folder.internal.UserProjProfile;
 /**
  * The Class NotificationMgr.
  */
+@Component("notificationMgr")
 public class NotificationMgr {
     /** The Constant logger. */
     private static final Logger LOGGER = LoggerFactory
