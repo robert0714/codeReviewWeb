@@ -37,7 +37,6 @@ public class SonarAnalysisController {
 			@RequestParam(value = "encoding", required = false) String encoding) {
 
 		String result = null;
-		LOGGER.debug("doPost");
 
 		LOGGER.debug("projectKey: {}", projectKey);
 		LOGGER.debug("projectVersion: {}", projectVersion);

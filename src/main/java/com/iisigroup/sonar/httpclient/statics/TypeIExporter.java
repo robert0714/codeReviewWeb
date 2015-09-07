@@ -277,8 +277,12 @@ public class TypeIExporter {
         
         POIUtils.writeWorkbookOut(file, wb);
     }
-    
-   protected static void exportCommonXlsV03(final List<PageIssues> srcTmp ,final UserFolder data , final File file)throws ParsePropertyException, InvalidFormatException, IOException{
+    protected static void exportCommonXlsV03(final List<PageIssues> srcTmp ,final UserFolder data , final File file)throws ParsePropertyException, InvalidFormatException, IOException{
+    	 final Workbook wb00 = new HSSFWorkbook();
+    	final Workbook wb   = generatCommonXlsV03(srcTmp, data ,wb00) ;
+    	POIUtils.writeWorkbookOut(file, wb);
+    }
+   public static Workbook   generatCommonXlsV03(final List<PageIssues> srcTmp ,final UserFolder data , final Workbook wb )throws ParsePropertyException, InvalidFormatException, IOException{
 	   final List<Issue> issueList = new ArrayList<Issue>(); 
    	
    	final Map<String,Rule> ruleIndex = new HashMap<String,Rule>();
@@ -303,7 +307,7 @@ public class TypeIExporter {
    	}
    	Collections.sort(issueList, new IssueComparator());
    	
-       final Workbook wb = new HSSFWorkbook();
+//       final Workbook wb = new HSSFWorkbook();
        final Sheet sheet = wb.createSheet("CR查核結果表");
         
        
@@ -448,7 +452,7 @@ public class TypeIExporter {
        printSetup.setPaperSize(PrintSetup.A4_PAPERSIZE);
        printSetup.setScale((short) 92);
        sheet.setHorizontallyCenter(true);
-       POIUtils.writeWorkbookOut(file, wb);
+       return wb ; 
    }
     /**
      * Export by jxls library.
@@ -460,20 +464,26 @@ public class TypeIExporter {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public static void exportXlsV03(final UserFolder data, final File file) throws ParsePropertyException, InvalidFormatException, IOException { 
-       
-    	final JsonClient01 client = new JsonClient01();
-    	
-//    	final List<PageIssues> srcTmp = client.getLastAnalyzedIssues(data.getInfo().getProjectKey());
-    	/***
-    	 * 2015.03.02 意鍰反應已經作過的分析找不到所以將當天的限制換掉
-    	 * 
-    	 * **/    	
-    	final List<PageIssues> srcTmp  =  client.searchIssuessByProjectKey(data.getInfo().getProjectKey());
+          	
+    	final List<PageIssues> srcTmp  = getSrcV03(data );
     	
     	exportCommonXlsV03(srcTmp, data, file);
     	
-    }
-   
+    } 
+
+	public static List<PageIssues> getSrcV03(final UserFolder data 
+			 ) throws ParsePropertyException,
+			InvalidFormatException, IOException {
+		final JsonClient01 client = new JsonClient01();
+
+		/***
+		 * 2015.03.02 意鍰反應已經作過的分析找不到所以將當天的限制換掉
+		 * 
+		 * **/
+		final List<PageIssues> srcTmp = client.searchIssuessByProjectKey(data
+				.getInfo().getProjectKey());
+		return srcTmp;
+	}
     /**
      * Export by jxls library.
      * 無法使用 jxls template方法

@@ -1,24 +1,35 @@
 package com.iisigroup.java.tech.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.iisigroup.scan.folder.internal.EmpFactory;
 import com.iisigroup.scan.folder.internal.UserFolder;
 import com.iisigroup.scan.folder.internal.UserProjProfile;
-
+ 
+/**
+ * The Class UserFolderUtils.
+ */
 public class UserFolderUtils {
+    
+    /**
+     * Instantiates a new user folder utils.
+     */
     private UserFolderUtils() {
     }
 
     /**
      * Exec by project key version.
-     * 
-     * @param projectKey
-     *            the project key
-     * @param projectVersion
-     *            the project version
+     *
+     * @param projectKey            the project key
+     * @param projectVersion            the project version
+     * @param encoding the encoding
      * @return the string
      */
     public static UserFolder convert(final String projectKey,
@@ -51,4 +62,28 @@ public class UserFolderUtils {
 
         return folder;
     }
+    
+    /**
+     * Adds the inf xls rep.
+     *
+     * @param target the target
+     * @param response the response
+     * @throws UnsupportedEncodingException the unsupported encoding exception
+     */
+    public  static void  addInfXlsRep(final UserFolder target ,HttpServletResponse response) throws UnsupportedEncodingException{		
+		String chtName = target.getInfo().getEmpdata().getChtName();
+		String projectKey = target.getInfo().getProjectKey();
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddmmss");
+		final String fileName = String.format(
+				"%s'sJAVA處ManualCR_查核表單%s",
+				StringUtils.isBlank(chtName) ? projectKey.replace(
+						":project", "") : chtName, sdf.format(new Date()));
+
+		response.setContentType("application/vnd.ms-excel");
+		String newfileName = java.net.URLEncoder.encode(fileName, "UTF-8")
+				.replaceAll("\\+", "%20"); // 取代+號是為了處理檔名中的空白字元問題
+		final String attachment = String.format(
+				";filename*=utf-8'zh_TW'%s.xls", newfileName);
+		response.setHeader("Content-disposition", attachment);
+	}
 }

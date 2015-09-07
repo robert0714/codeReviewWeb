@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <HTML>
 <HEAD>
@@ -253,8 +255,7 @@
 			<input type="button"   id="log_${userFolder['info']['projectKey']}"   name="log_${userFolder['info']['projectKey']}"    value="LOG"
 			onclick="sonarAnalysis('${userFolder['info']['projectKey']}' ,'${userFolder['info']['empdata']['empId']}',  'LOG' )" />
 			<br/>
-			<!-- <img alt="${userFolder['info'].getSonarURL(sonarUrl)}" src="${baseUrl}/img/excel_32_icon.png" onclick="manualCR('${userFolder['info']['projectKey']}' ,'${userFolder['info']['empdata']['empId']}' , '${version}','000', 'GETPCR' )"  /> 
-    	 -->
+			 
     	<a onclick="manualCR('${userFolder['info']['projectKey']}' ,'${userFolder['info']['empdata']['empId']}' , '${version}','000', 'GETPCR' )"    >. </a>
 		</td>
 		<td>
@@ -267,7 +268,7 @@
 						onclick="manualCR('${userFolder['info']['projectKey']}' ,'${userFolder['info']['empdata']['empId']}' , '${version}','${hasAttatchment}', 'GETUPLOADERFILE' )" >		
 					
 			 	  </c:if>
-			 	  	<form action="manualCR" method="post"  enctype="multipart/form-data" id="step24${userFolder['info']['projectKey']}" name="step24${userFolder['info']['projectKey']}"  >
+			 	  	<form action="${baseUrl}/manualCR" method="post"  enctype="multipart/form-data" id="step24${userFolder['info']['projectKey']}" name="step24${userFolder['info']['projectKey']}"  >
 						<input  type="file" name="fileSelect"  ID="fileSelect" runat="server" size="50" accept="application/vnd.ms-excel ,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet " />
 						<br/>					
 						<input  type="submit" value="查核同仁上傳" />
