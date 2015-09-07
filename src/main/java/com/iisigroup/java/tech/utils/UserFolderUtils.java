@@ -70,14 +70,8 @@ public class UserFolderUtils {
      * @param response the response
      * @throws UnsupportedEncodingException the unsupported encoding exception
      */
-    public  static void  addInfXlsRep(final UserFolder target ,HttpServletResponse response) throws UnsupportedEncodingException{		
-		String chtName = target.getInfo().getEmpdata().getChtName();
-		String projectKey = target.getInfo().getProjectKey();
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddmmss");
-		final String fileName = String.format(
-				"%s'sJAVA處ManualCR_查核表單%s",
-				StringUtils.isBlank(chtName) ? projectKey.replace(
-						":project", "") : chtName, sdf.format(new Date()));
+    public  static void  addInfXlsRep(final String fileName   ,HttpServletResponse response) throws UnsupportedEncodingException{		
+		
 
 		response.setContentType("application/vnd.ms-excel");
 		String newfileName = java.net.URLEncoder.encode(fileName, "UTF-8")

@@ -9,7 +9,17 @@ package com.iisigroup.java.tech.controller;
 
 import com.iisigroup.java.tech.utils.UserFolderUtils;
 import com.iisigroup.scan.folder.internal.UserFolder;
+import com.iisigroup.sonar.httpclient.statics.StaticsPreview;
+import com.iisigroup.sonar.httpclient.statics.TypeIExporter;
+import com.iisigroup.sonar.httpclient.statics.model.ProjectSum;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,10 +63,18 @@ public class ManualCRController {
 		LOGGER.debug("projectVersion: {}", projectVersion);
 		LOGGER.debug("encoding: {}", encoding);
 		LOGGER.debug("command: {}", command);
+		
         if ( "GETPCR".equalsIgnoreCase(command)) {
         	
             final UserFolder target = UserFolderUtils.convert(projectKey,projectVersion, encoding);
             return new ModelAndView("pcrExcelView", "userFolder", target);
+            
+        }else if ("GETPSTATICS".equalsIgnoreCase(command)) {
+            final UserFolder target = UserFolderUtils.convert(projectKey,
+                    projectVersion, encoding);
+
+           
+            return new ModelAndView("pStatExcelView", "userFolder", target);
         }else{
         	return null;
         }

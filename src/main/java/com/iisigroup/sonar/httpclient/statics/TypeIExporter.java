@@ -46,6 +46,7 @@ import com.iisigroup.sonar.httpclient.statics.model.SumPer2Weeks;
  
  
  
+// TODO: Auto-generated Javadoc
 /**
  * The Class TypeIExporter.
  */
@@ -57,8 +58,8 @@ public class TypeIExporter {
     /**
      * Export by jxls library.
      *
-     * @param unit the unit
-     * @param fileName the file name
+     * @param data the data
+     * @param file the file
      * @throws ParsePropertyException the parse property exception
      * @throws InvalidFormatException the invalid format exception
      * @throws IOException Signals that an I/O exception has occurred.
@@ -71,16 +72,31 @@ public class TypeIExporter {
         final Workbook aHSSFWorkbook = transformer.transformXLS(TypeIExporter.class.getResource("RLFP_TEMPLATE_v2.xls").openStream(), beans);
         POIUtils.writeWorkbookOut(file, aHSSFWorkbook);
     }
+    
     /**
      * Export by jxls library.
      *
-     * @param unit the unit
-     * @param fileName the file name
+     * @param data the data
+     * @param file the file
      * @throws ParsePropertyException the parse property exception
      * @throws InvalidFormatException the invalid format exception
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public static void exportJxlsV3(final List<ProjectSum>  data, final File file) throws ParsePropertyException, InvalidFormatException, IOException {
+        final Workbook aHSSFWorkbook = exportWorkbookJxlsV3(data );
+        POIUtils.writeWorkbookOut(file, aHSSFWorkbook);
+    }
+    
+    /**
+     * Export workbook jxls v3.
+     *
+     * @param data the data
+     * @return the workbook
+     * @throws ParsePropertyException the parse property exception
+     * @throws InvalidFormatException the invalid format exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public static Workbook exportWorkbookJxlsV3(final List<ProjectSum>  data ) throws ParsePropertyException, InvalidFormatException, IOException {
         Map<String, Object> beans = new HashMap<String, Object>();
        
         if(CollectionUtils.isNotEmpty(data)){
@@ -93,14 +109,15 @@ public class TypeIExporter {
         beans.put("data", data);
         XLSTransformer transformer = new XLSTransformer();
         final Workbook aHSSFWorkbook = transformer.transformXLS(TypeIExporter.class.getResource("RLFP_TEMPLATE_v3.xls").openStream(), beans);
-        POIUtils.writeWorkbookOut(file, aHSSFWorkbook);
+        return aHSSFWorkbook;
     }
     
     /**
      * Export by jxls library.
      * 無法使用 jxls template方法
-     * @param unit the unit
-     * @param fileName the file name
+     *
+     * @param data the data
+     * @param file the file
      * @throws ParsePropertyException the parse property exception
      * @throws InvalidFormatException the invalid format exception
      * @throws IOException Signals that an I/O exception has occurred.
@@ -129,6 +146,16 @@ public class TypeIExporter {
         final Workbook aHSSFWorkbook = transformer.transformXLS(TypeIExporter.class.getResource("RLFP_TEMPLATE_v4.xls").openStream(), beans);
         POIUtils.writeWorkbookOut(file, aHSSFWorkbook);
     }
+	
+	/**
+	 * Export xls v04.
+	 *
+	 * @param data the data
+	 * @param targetFile the target file
+	 * @throws ParsePropertyException the parse property exception
+	 * @throws InvalidFormatException the invalid format exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void exportXlsV04(Map<String, List<SumPer2Weeks>> data,
 			File targetFile)throws ParsePropertyException, InvalidFormatException, IOException {
 		
@@ -168,6 +195,12 @@ public class TypeIExporter {
 		}
 	}
 	
+	/**
+	 * Recombine.
+	 *
+	 * @param src the src
+	 * @return the map
+	 */
 	static Map<String, List<SumPer2Weeks>> recombine(Map<String, List<SumPer2Weeks>>  src){
 		final Map<String, List<SumPer2Weeks>> result = new HashMap<String, List<SumPer2Weeks>>();
 		 final Set<Entry<String, List<SumPer2Weeks>>> entrySet = src.entrySet() ;
@@ -188,6 +221,12 @@ public class TypeIExporter {
 		return result;
 	}
 	
+	/**
+	 * Extract.
+	 *
+	 * @param sample the sample
+	 * @return the string
+	 */
 	static String extract(String sample) {
 		final Matcher matcher = Pattern.compile(regularRex).matcher(sample);
 		if (matcher.find()) {
@@ -196,8 +235,17 @@ public class TypeIExporter {
 		return null ;
 	}
 	
+	/** The Constant regularRex. */
 	private static final String regularRex ="[5|1]0\\((.*技術處)" ;
 	
+	/**
+	 * Process sheet.
+	 *
+	 * @param sheetName the sheet name
+	 * @param wb the wb
+	 * @param data the data
+	 * @param months the months
+	 */
 	protected static void processSheet( final String sheetName , 
 			final Workbook wb ,
 			final List<SumPer2Weeks> data , 
@@ -247,8 +295,9 @@ public class TypeIExporter {
     /**
      * Export by jxls library.
      * 無法使用 jxls template方法
-     * @param unit the unit
-     * @param fileName the file name
+     *
+     * @param data the data
+     * @param file the file
      * @throws ParsePropertyException the parse property exception
      * @throws InvalidFormatException the invalid format exception
      * @throws IOException Signals that an I/O exception has occurred.
@@ -277,11 +326,34 @@ public class TypeIExporter {
         
         POIUtils.writeWorkbookOut(file, wb);
     }
+    
+    /**
+     * Export common xls v03.
+     *
+     * @param srcTmp the src tmp
+     * @param data the data
+     * @param file the file
+     * @throws ParsePropertyException the parse property exception
+     * @throws InvalidFormatException the invalid format exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     protected static void exportCommonXlsV03(final List<PageIssues> srcTmp ,final UserFolder data , final File file)throws ParsePropertyException, InvalidFormatException, IOException{
     	 final Workbook wb00 = new HSSFWorkbook();
     	final Workbook wb   = generatCommonXlsV03(srcTmp, data ,wb00) ;
     	POIUtils.writeWorkbookOut(file, wb);
     }
+   
+   /**
+    * Generat common xls v03.
+    *
+    * @param srcTmp the src tmp
+    * @param data the data
+    * @param wb the wb
+    * @return the workbook
+    * @throws ParsePropertyException the parse property exception
+    * @throws InvalidFormatException the invalid format exception
+    * @throws IOException Signals that an I/O exception has occurred.
+    */
    public static Workbook   generatCommonXlsV03(final List<PageIssues> srcTmp ,final UserFolder data , final Workbook wb )throws ParsePropertyException, InvalidFormatException, IOException{
 	   final List<Issue> issueList = new ArrayList<Issue>(); 
    	
@@ -454,11 +526,13 @@ public class TypeIExporter {
        sheet.setHorizontallyCenter(true);
        return wb ; 
    }
+    
     /**
      * Export by jxls library.
      * 無法使用 jxls template方法
-     * @param unit the unit
-     * @param fileName the file name
+     *
+     * @param data the data
+     * @param file the file
      * @throws ParsePropertyException the parse property exception
      * @throws InvalidFormatException the invalid format exception
      * @throws IOException Signals that an I/O exception has occurred.
@@ -471,6 +545,15 @@ public class TypeIExporter {
     	
     } 
 
+	/**
+	 * Gets the src v03.
+	 *
+	 * @param data the data
+	 * @return the src v03
+	 * @throws ParsePropertyException the parse property exception
+	 * @throws InvalidFormatException the invalid format exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static List<PageIssues> getSrcV03(final UserFolder data 
 			 ) throws ParsePropertyException,
 			InvalidFormatException, IOException {
@@ -484,11 +567,13 @@ public class TypeIExporter {
 				.getInfo().getProjectKey());
 		return srcTmp;
 	}
+    
     /**
      * Export by jxls library.
      * 無法使用 jxls template方法
-     * @param unit the unit
-     * @param fileName the file name
+     *
+     * @param data the data
+     * @param file the file
      * @throws ParsePropertyException the parse property exception
      * @throws InvalidFormatException the invalid format exception
      * @throws IOException Signals that an I/O exception has occurred.
@@ -553,21 +638,18 @@ public class TypeIExporter {
         sheet.setHorizontallyCenter(true);
         POIUtils.writeWorkbookOut(file, wb);
     }
+    
     /**
-     * 調整字型/畫線
-     * 
-     * @param sheet
-     * @param font
-     *            字型大小
-     * @param columnStyle
-     *            {@see CellStyle.ALIGN_CENTER}
-     * @param line
-     *            畫線(預設值:黑色)
-     * @param bold
-     *            粗體字
-     * @param color
-     *            底色
-     *            
+     * 調整字型/畫線.
+     *
+     * @param sheet the sheet
+     * @param fontSize the font size
+     * @param columnStyle            {@see CellStyle.ALIGN_CENTER}
+     * @param line            畫線(預設值:黑色)
+     * @param bold            粗體字
+     * @param color            底色
+     * @param fontName the font name
+     * @return the cell style
      */
     private static CellStyle buildCellStyle(Sheet sheet, Integer fontSize,
                     short columnStyle, boolean line, boolean bold, Integer color,String fontName) {
@@ -607,8 +689,18 @@ public class TypeIExporter {
    
 
 
+	/**
+	 * The Class IssueComparator.
+	 */
 	private static class IssueComparator implements Comparator<Issue>{
 
+		/**
+		 * Compare.
+		 *
+		 * @param object1 the object1
+		 * @param object2 the object2
+		 * @return the int
+		 */
 		public int compare(Issue object1, Issue object2) {			
 			  return new CompareToBuilder()
               .append(object1.getRule(), object2.getRule())
@@ -617,8 +709,19 @@ public class TypeIExporter {
               .toComparison();
 		}
     }
+	
+	/**
+	 * The Class SumPer2WeeksComparator.
+	 */
 	private static class SumPer2WeeksComparator implements Comparator<SumPer2Weeks>{
 
+		/**
+		 * Compare.
+		 *
+		 * @param o1 the o1
+		 * @param o2 the o2
+		 * @return the int
+		 */
 		@Override
 		public int compare(SumPer2Weeks o1, SumPer2Weeks o2) {
 			return new CompareToBuilder().append(o1.getEmpData().getEmpId(),
