@@ -10,8 +10,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<c:set var="baseUrl" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.localPort}${pageContext.servletContext.contextPath}" scope="page" />
     <c:set var="sonarUrl" value="${pageContext.request.scheme}://${pageContext.request.serverName}:9000" scope="page" />   
-	<jsp:useBean id="personCtr" class="com.iisigroup.java.tech.controller.PersonContoller" />
-	<jsp:useBean id="manualCrCtr" class="com.iisigroup.java.tech.controller.ManualCRController" />
+	<jsp:useBean id="manualCrCtr" class="com.iisigroup.java.tech.service.ManualCRService" />
 	<jsp:useBean id="operator" class="com.iisigroup.java.tech.controller.operation.UserFolderOp" />
 	<jsp:useBean id="queueManager" class="com.iisigroup.java.tech.controller.operation.FileQueueManager" />
 	
