@@ -199,4 +199,26 @@ public class ManualCRService {
             LOGGER.error(e.getMessage(), e);
         }
     }
+    
+    /**
+     * Write file by byte.
+     *
+     * @param content the content
+     * @param target the target
+     * @param fileName the file name
+     */
+    public void writeFileByByte(byte[] content, UserFolder target,String fileName){
+    	final File projectVerFolderVer = new UserFolderOp().getProjFolderVer(target);
+        try {
+            final File destFile = new File(projectVerFolderVer, fileName);
+            if (destFile.exists()) {
+                LOGGER.info("{} already exist", destFile.getCanonicalPath());
+                destFile.delete();
+                LOGGER.debug("delete File:{}" ,destFile.getCanonicalPath());
+            } 
+            FileUtils.writeByteArrayToFile(destFile, content);
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
 }

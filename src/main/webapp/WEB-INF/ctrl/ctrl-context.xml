@@ -49,6 +49,17 @@
 		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
 		p:fallbackToSystemLocale="false" >
 	</bean>
- 
+	
+<!-- 處理檔案上傳  -->
+	<bean
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"
+		id="multipartResolver"></bean>
 		
+<!-- 	<bean id="multipartResolver" -->
+<!--         class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+
+<!--  	   one of the properties available; the maximum file size in bytes -->
+<!--   	  <property name="maxUploadSize" value="100000"/> -->
+
+<!-- 	</bean> -->
 </beans>

@@ -268,7 +268,7 @@
 						onclick="manualCR('${userFolder['info']['projectKey']}' ,'${userFolder['info']['empdata']['empId']}' , '${version}','${hasAttatchment}', 'GETUPLOADERFILE' )" >		
 					
 			 	  </c:if>
-			 	  	<form action="${baseUrl}/manualCR" method="post"  enctype="multipart/form-data" id="step24${userFolder['info']['projectKey']}" name="step24${userFolder['info']['projectKey']}"  >
+			 	  	 <form:form  modelAttribute="checkForm" action="${baseUrl}/ctrl/crCtrl/upload" method="post"  enctype="multipart/form-data" id="step24${userFolder['info']['projectKey']}" name="step24${userFolder['info']['projectKey']}"  >
 						<input  type="file" name="fileSelect"  ID="fileSelect" runat="server" size="50" accept="application/vnd.ms-excel ,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet " />
 						<br/>					
 						<input  type="submit" value="查核同仁上傳" />
@@ -277,7 +277,8 @@
 						<input type="hidden" id ="command" name="command"  value="upload"    size="0" height="0"  /> 
 						<input type="hidden" id ="encoding" name="encoding"  value="UTF-8"    size="0" height="0"  /> 
 						<input type="hidden" id ="step" name="step"  value="2,4"    size="0" height="0"  /> 
-				 	</form> 
+						
+				 	</form:form>
 			 	 <br/>			 	 
 			</c:forEach>
 		</td>

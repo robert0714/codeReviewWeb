@@ -1,5 +1,7 @@
 package com.iisigroup.java.tech.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,14 +15,17 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObjectBuilder;
+import javax.servlet.http.Part;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +51,62 @@ public class LdapViewControler {
 		LOGGER.debug("...............LdapViewControler.........");
 		;
 	}
+	@RequestMapping(   params = "form", method = RequestMethod.POST)
+//	@RequestMapping(  value = "/upload" ,  method = RequestMethod.GET )
+    public String upload(
+    		@RequestParam(value = "command", required = false) String command,
+			@RequestParam(value = "projectKey", required = false) String projectKey,
+			@RequestParam(value = "projectVersion", required = false) String projectVersion,
+			@RequestParam(value = "encoding", required = false) String encoding , 
+			@RequestParam(value = "step", required = false) String[] step ,
+    		 
+    		@RequestParam(value="file", required=false) Part file) {
+		LOGGER.info("upload");  
+		
+		
+//        if (bindingResult.hasErrors()) {
+//            uiModel.addAttribute("message", new Message("error",
+//                    messageSource.getMessage("contact_save_fail", new Object[]{}, locale)));
+//            uiModel.addAttribute("contact", contact);
+//            return "contacts/create";
+//        }
+        
+     // constructs the directory path to store upload file
+        // this path is relative to application's directory
+        
+//        String uploadPath = httpServletRequest.getServletContext().getRealPath("")
+//                + File.separator + UPLOAD_DIRECTORY;
+//        
+//        // creates the directory if it does not exist
+//        File uploadDir = new File(uploadPath);
+//        if (!uploadDir.exists()) {
+//            uploadDir.mkdir();
+//        }
+//        uiModel.asMap().clear();
+//        redirectAttributes.addFlashAttribute("message", new Message("success",
+//                messageSource.getMessage("contact_save_success", new Object[]{}, locale)));
+ 
+
+        // Process upload file
+        if (file != null) {
+            LOGGER.info("File name: " + file.getName());
+            LOGGER.info("File size: " + file.getSize());
+            LOGGER.info("File content type: " + file.getContentType());
+            byte[] fileContent = null;
+            try {
+                InputStream inputStream = file.getInputStream();
+                if (inputStream == null) LOGGER.info("File inputstream is null");
+                fileContent = IOUtils.toByteArray(inputStream);
+               
+            } catch (IOException ex) {
+            	LOGGER.error(ex.getMessage() , ex);
+                LOGGER.error("Error saving uploaded file");
+            }
+           
+        }
+        
+        return "redirect:/contacts/";
+    }
 	@RequestMapping(value = "/personCR")
 	public ModelAndView personCR(
 			@RequestParam(value = "empUid", required = false) String empUid)
