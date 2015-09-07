@@ -163,6 +163,18 @@ public class TypeIExporter {
 			return;
 		}
 		if(MapUtils.isNotEmpty(data)){
+			 final Workbook wb = new HSSFWorkbook();
+			 exportXlsV04(data, wb);
+			  POIUtils.writeWorkbookOut(targetFile, wb);
+		}
+	}
+	public static void exportXlsV04(Map<String, List<SumPer2Weeks>> data,
+			final Workbook wb  )throws ParsePropertyException, InvalidFormatException, IOException {
+		
+		if(MapUtils.isEmpty(data)){
+			return;
+		}
+		if(MapUtils.isNotEmpty(data)){
 			
 			//產生表頭
 			 final List<String> months = new ArrayList<String>();
@@ -179,7 +191,7 @@ public class TypeIExporter {
 				}
 			}
 			 Collections.sort ( months ) ;
-			 final Workbook wb = new HSSFWorkbook();
+//			 final Workbook wb = new HSSFWorkbook();
 			 Collections.sort ( allData ,new SumPer2WeeksComparator()) ;
 			 processSheet("all",wb,allData,months);
 			 
@@ -188,13 +200,10 @@ public class TypeIExporter {
 			 for( Entry<String, List<SumPer2Weeks>> entryUnit : entrySet ){
 				 final String depart = entryUnit.getKey();
 				 final List<SumPer2Weeks> unitData = entryUnit.getValue();
-				 System.out.println(depart);
 				 processSheet(depart,wb,unitData,months);
-			 }
-			  POIUtils.writeWorkbookOut(targetFile, wb);
+			 } 
 		}
 	}
-	
 	/**
 	 * Recombine.
 	 *

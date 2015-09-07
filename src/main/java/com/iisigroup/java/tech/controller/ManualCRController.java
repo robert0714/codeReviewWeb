@@ -9,14 +9,17 @@ package com.iisigroup.java.tech.controller;
 
 import com.iisigroup.java.tech.utils.UserFolderUtils;
 import com.iisigroup.scan.folder.internal.UserFolder;
+import com.iisigroup.sonar.httpclient.statics.StaticsMonthly;
 import com.iisigroup.sonar.httpclient.statics.StaticsPreview;
 import com.iisigroup.sonar.httpclient.statics.TypeIExporter;
 import com.iisigroup.sonar.httpclient.statics.model.ProjectSum;
+import com.iisigroup.sonar.httpclient.statics.model.SumPer2Weeks;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -75,7 +78,11 @@ public class ManualCRController {
 
            
             return new ModelAndView("pStatExcelView", "userFolder", target);
-        }else{
+        }else if ("GETSTATICS".equalsIgnoreCase(command)) {
+             
+            
+            return new ModelAndView("statExcelView");
+        } else  {
         	return null;
         }
     }
