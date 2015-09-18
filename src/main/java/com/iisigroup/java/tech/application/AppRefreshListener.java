@@ -61,11 +61,11 @@ public class AppRefreshListener implements ApplicationListener<ContextRefreshedE
 		 Timer timer = new Timer();
 	       
 	      
-        // 設定填入schedule中的 Date firstTime     為現在的15秒後
-        final  Date firstTime = DateUtils.addSeconds(new Date(),  15);
-        
-        // 設定填入schedule中的 Date firstTime     為現在的30秒後
-        final  Date sencondTime = DateUtils.addSeconds(new Date(),  30);
+	        // 設定填入schedule中的 Date firstTime     為現在的15秒後
+	        final  Date firstTime = DateUtils.addSeconds(new Date(),  21*60*60);
+	        
+	        // 設定填入schedule中的 Date firstTime     為現在的30秒後
+	        final  Date sencondTime = DateUtils.addSeconds(new Date(),21*60*60+  30);
         
         /***
          * 改成每個小時的原因....是當初設定一天一次....

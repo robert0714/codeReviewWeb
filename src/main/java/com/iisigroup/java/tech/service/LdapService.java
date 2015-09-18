@@ -12,12 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-
-
-
-
-
-
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -55,7 +50,7 @@ public class LdapService {
 				
 			}
 		}
-		if(index == null ){
+		if(index == null || MapUtils.isEmpty(index)){
 			//java技術處為OU=TDD10,OU=15_TDD00,OU=IE,DC=iead,DC=local
 	    	index = component.exportV1("OU=15_TDD00-BK,OU=IE,DC=iead,DC=local");
 	    	// external handle for exporting to file
